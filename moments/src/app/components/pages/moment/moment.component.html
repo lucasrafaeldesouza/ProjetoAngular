@@ -1,0 +1,57 @@
+<div class="moment" *ngIf="moment">
+    <h1>{{ moment.title }}</h1>
+    <img
+      src="{{ baseApiUrl }}uploads/{{ moment.image }}"
+      alt="{{ moment.title }}"
+    />
+
+<div class="about-moment">
+    <h3>Sobre este momento:</h3>
+    <p>{{ moment.description }}</p>
+  </div>
+
+  <div class="actions">
+    <h3>Ações:</h3>
+    <a routerLink="/moments/edit/{{ moment.id }}" class="edit-btn"
+      ><fa-icon [icon]="faEdit"></fa-icon> Editar</a
+    >
+    <button class="remove-btn" (click)="removeHandler(moment.id!)">
+        <fa-icon [icon]="faTimes"></fa-icon> Excluir
+      </button>
+    </div>
+
+    <div class="comments">
+        <h3>Comentarios ({{
+          moment.comments!.length > 0 ? moment.comments!.length : 0
+        }}):
+      </h3>
+      <div>
+        <div class="comment-container" *ngFor="let comment of moment.comments">
+          <p class="comment">{{ comment.text }}</p>
+          <p class="author"><span>por:</span> {{ comment.username }}</p>
+        </div>
+        <div  class="comment-container">
+          <p class="comment">Texto comentário</p>
+          <p class="author"><span>por:</span>Matheus</p>
+        </div>
+      </div>
+      <ng-template #noComments>
+        <p>Não há comentários!</p>
+      </ng-template>
+    </div>
+
+    <div class="comment-form">
+      <h3>Deixe um comentário:</h3>
+      <form>
+        <div class="form-group">
+          <label for="text">Comentário:</label>
+          <textarea placeholder="O que você quer comentar?" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="username">Nome:</label>
+          <input type="text" placeholder="Digite seu nome" required>
+        </div>
+        <input type="submit" value="comentar!"/>
+      </form>
+    </div>
+</div>
